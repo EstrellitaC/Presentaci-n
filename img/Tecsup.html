@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<!-- saved from url=(0047)https://app.tecsup.edu.pe/SGA/Evaluaciones.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+	<meta http-equiv="X-UA-Compatible" content="IE=8"> 
+	<title>Tecsup</title>
+	
+		
+	<script language="JavaScript" type="text/JavaScript"></script>
+	<script id="clientEventHandlersJS" language="javascript"></script>
+	<style type="text/css">
+		body{
+			SCROLLBAR-FACE-COLOR: #e0dfdd;
+			SCROLLBAR-HIGHLIGHT-COLOR: white;
+			SCROLLBAR-SHADOW-COLOR: #0382AD;/*#0283ad;*/
+			SCROLLBAR-3DLIGHT-COLOR: white;
+			SCROLLBAR-ARROW-COLOR: #0283ad;
+			SCROLLBAR-TRACK-COLOR: #f8f7f7;
+			SCROLLBAR-DARKSHADOW-COLOR: white;
+			font-family:Verdana, Arial, Helvetica, sans-serif;
+			font-size: 12px;		
+	    }
+	</style>
+	<script type="text/javascript">
+		/*MouseOver*/
+		function MM_swapImgRestore()
+		{
+		 var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
+		}
+		function MM_preloadImages() { //v3.0
+		var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
+		 var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
+		 if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
+		}
+		
+		function MM_findObj(n, d) { //v4.01
+		var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+		 d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+		if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+		for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
+		if(!x && d.getElementById) x=d.getElementById(n); return x;
+		}
+		
+		function MM_swapImage() { //v3.0
+		var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
+		if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
+		}
+	</script>
+	<link href="./Tecsup_files/cab.css" rel="stylesheet" type="text/css">
+
+	<script type="text/javascript">
+		function onLoad(){
+						
+		}	
+		function fc_CerrarSesion(){
+			if ( confirm("¿Está seguro de cerrar sesión?") ){
+				//form = document.forms[0];
+				document.forms[0].txhAccion.value="CERRAR_SESION";
+				document.forms[0].submit();				
+			}
+		}
+		
+		function fc_CambiarClave(){
+			//JHPR: 2008-04-10 Cambio de Clave.
+			window.location.href = "/SGA/evaluaciones/cambiaClaveEvaluacion.html";			
+		}
+	</script>
+</head>
+<body leftmargin="0" topmargin="0" onload="onLoad();">
+	<div id="container">
+		<div id="content">
+			<form id="frmMain" name="frmMain" method="post" action="https://app.tecsup.edu.pe/SGA/Evaluaciones.html">
+		<input id="txhAccion" name="accion" type="hidden" value="">
+		
+		<table border="0" cellspacing="0" cellpadding="0" background="./Tecsup_files/cabecera_celeste.jpg" width="989px" align="center">
+			<tbody><tr>
+            	<td height="65px">&nbsp;
+                </td>                
+            </tr>			
+			<tr>	
+				<td valign="middle" width="495">						
+					<span class="textonormal">&nbsp;&nbsp;&nbsp;Bienvenido(a): &nbsp;<label for="codEval" class="Opciones"><b>ESTRELLITA MARIANELLA CAYCEDO</b></label></span>						
+					<label onclick="fc_CerrarSesion();" style="cursor: pointer;">
+                        <span class="textomenu" onmouseover="this.className=&#39;textolink&#39;" onmouseout="this.className=&#39;textomenu&#39;">[Cerrar Sesión]</span>
+					</label>
+						&nbsp;&nbsp;						
+					<label onclick="fc_CambiarClave();" style="cursor: pointer;">
+						<span class="textomenu" onmouseover="this.className=&#39;textolink&#39;" onmouseout="this.className=&#39;textomenu&#39;">[Cambiar Contraseña]</span>
+					</label>
+				</td>								
+				<td>
+														
+				</td>
+				<td width="5px">
+				</td>
+			</tr>	
+		</tbody></table>
+		
+		
+		
+		 <table cellpadding="0" cellspacing="0" width="989px" border="0" align="center">
+         <tbody><tr><td height="10px">&nbsp;</td></tr>
+         <tr><td align="center">
+         <iframe id="Body" name="Body" src="./Tecsup_files/menuEvaluaciones.html" scrolling="auto" frameborder="0" height="550px" width="989px" style="align:center;margin-top:9px"></iframe>
+         </td></tr>
+         </tbody></table>
+		
+	</form>
+		</div>
+	</div>
+
+</body></html>

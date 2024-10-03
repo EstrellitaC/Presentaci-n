@@ -1,0 +1,163 @@
+var mstrCheckeaTodos = 0;
+var mobjFila = null; // obj fila selecionada
+var mstrFila = null; // numero de la fila dentro de la tabla
+
+function Fc_Popup(url,ancho,alto,nombre){ 
+ 	var winl = (screen.width - parseInt(ancho)) / 2;	
+	var wint = (screen.height - parseInt(alto)) / 2;	
+	msg=window.open(url,nombre,"toolbar=no,left=" + winl + ",top=" + wint + ",width=" + ancho + ",height="+alto+",directories=no,status=no,scrollbars=no,resize=no,menubar=no");
+}
+
+function Fc_PopupScroll(url,ancho,alto,nombre){ 
+	var winl = (screen.width - parseInt(ancho)) / 2;	
+	var wint = (screen.height - parseInt(alto)) / 2;	
+	msg=window.open(url,nombre,"toolbar=no,left=" + winl + ",top=" + wint + ",width=" + ancho + ",height="+alto+",directories=no,status=no,scrollbars=yes,resize=no,menubar=no");
+}
+
+function Fc_Popup_Resizable(url,ancho,alto,nombre){  
+	var winl = (screen.width - parseInt(ancho)) / 2;	
+	var wint = (screen.height - parseInt(alto)) / 2;	
+	msg=window.open(url,nombre,"toolbar=no,left=" + winl + ",top=" + wint + ", width=" + ancho + ", height="+alto+", directories=no, status=no, scrollbars=yes, resizable=yes, menubar=no");
+}
+
+/* EBC */
+function Fc_Popup_AutoResizable(url){
+  foto1= new Image();
+  foto1.src=(url);
+  Fc_Muestramelo(url);
+}
+
+function Fc_Muestramelo(url){
+  if((foto1.width!=0)&&(foto1.height!=0)){
+	largh=foto1.width+20;
+	altez=foto1.height+20;
+	finestra=window.open(url,"","width="+largh+",height="+altez+",status=no,toolbar=no,menubar=no,location=no,resizable=yes");
+  }
+  else{
+    i=setTimeout("Fc_Muestramelo('"+url+"')",20);
+  }
+}
+
+function Fc_Popup_AutoResizable2(url){
+  finestra=window.open('',"","width=0,height=0,status=no,toolbar=no,menubar=no,scrollbars=yes,location=no,resizable=yes");
+  	var html_version = '<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">';
+  	finestra.document.write( html_version+'<body topmargin=0 leftmargin=0 rigthmargin=0><img id="PM" src="'+url+'"/></body>' );
+  	var image = finestra.document.getElementById('PM');
+  	if(image.height > screen.height -100){
+  		image.height = screen.height -100;
+  	}
+  	finestra.resizeTo(image.width+30, image.height+86);
+  	finestra.document.close();
+}
+
+
+
+/*function fc_Trim(psString){
+	return String(psString).replace(/[\s]/g,"");
+}*/
+
+/*function trim(psString){
+	return String(psString).replace(/[\s]/g,"");
+}*/
+function fc_Trim(str, chars) {
+	return ltrim(rtrim(str, chars), chars);
+}
+function trim(str, chars) {
+	return ltrim(rtrim(str, chars), chars);
+}
+ 
+function ltrim(str, chars) {
+	chars = chars || "\\s";
+	return str.replace(new RegExp("^[" + chars + "]+", "g"), "");
+}
+ 
+function rtrim(str, chars) {
+	chars = chars || "\\s";
+	return str.replace(new RegExp("[" + chars + "]+$", "g"), "");
+}
+
+function Fc_Popup_Resize_No_Scrollbars(url,ancho,alto,nombre){  
+	var winl = (screen.width - parseInt(ancho)) / 2;	
+	var wint = (screen.height - parseInt(alto)) / 2;	
+	msg=window.open(url,nombre,"toolbar=no,left=" + winl + ",top=" + wint + ", width=" + ancho + ", height="+alto+", directories=no, status=no, scrollbars=no, resizable=yes, menubar=no");
+}
+
+
+function fc_AgregaDias(pstrFecIni,pstrNroDias,pstrIndDiasUtiles,pstrFeriados) {
+
+	year  = pstrFecIni.substring(6,10);
+	month = pstrFecIni.substring(3,5);
+	day   = pstrFecIni.substring(0,2);			
+	var newdate=new Date(month+'/'+day+'/'+year);
+	if(pstrIndDiasUtiles==null){	
+		var newtimems=newdate.getTime()+(pstrNroDias*24*60*60*1000);
+		newdate.setTime(newtimems);
+		day = newdate.getDate();
+		month = newdate.getMonth()+1;
+		year = newdate.getFullYear();
+		if(Number(day)<10) day = '0'+day;
+		if(Number(month)<10) month = '0'+month;		
+	}else if(pstrIndDiasUtiles=="1"){	
+		var strFeriado = new String();
+		strFeriado = pstrFeriados;
+		//6 -> sabado / 0 -> domingo	
+		for(g=1;g<= pstrNroDias;g++){			
+			var newtimems=newdate.getTime()+(1*24*60*60*1000);
+			newdate.setTime(newtimems);
+			day = newdate.getDate();
+			month = newdate.getMonth()+1;
+			year = newdate.getFullYear();
+			if(Number(day)<10) day = '0'+day;
+			if(Number(month)<10) month = '0'+month;					
+			if(newdate.getDay() == 0 || newdate.getDay() == 6){
+			//Si el dia es sabado o domingo aumentamos un dia adicional	
+				g--
+			}
+			else if(strFeriado.indexOf(day+'/'+month+'/'+year) >= 0){
+			//caso contrario si es feriado aumentamos un dia mas
+				g--
+			}					
+		}
+	}	 
+	return day+'/'+month+'/'+year;
+}
+
+ function ValidarRuc(strNomRuc){        
+    var suma = 0;
+    var Ruc = new String(document.all[strNomRuc].value);
+    if (Ruc.length == 11){    
+		if (Ruc!="99999999999") {//PARA QUE ACEPTE ESTE RUC COMO VALIDO		
+			Ruc = Ruc.split("");
+			var strPar = new String("5,4,3,2,7,6,5,4,3,2,");
+			var arrPar = new Array(10);
+			arrPar = strPar.split(",");
+
+			var caracter = parseInt(Ruc[10]);
+			for(var i=0; i<10; i++){			
+				suma = parseInt(suma) + parseInt(arrPar[i]) * parseInt(Ruc[i]);
+			}
+					
+			var resto = suma % 11;
+			var verificador = 11 - resto;
+			if (verificador==11){			
+				verificador = 1;
+			}else if (verificador==10){							
+					verificador = 0;
+			}
+			//return verificador==caracter;
+			if (verificador!=caracter){			
+				alert("R.U.C. no valido.");
+				document.all[strNomRuc].focus();
+			}
+		}
+    }else{       
+		if (Ruc.length!=0){		
+			alert("Longitud de R.U.C. erronea.");
+			document.all[strNomRuc].focus();
+		}
+    }
+}
+
+function fc_Right(pstrVal,pstrNro){
+	return pstrVal.substr(pstrVal.length-pstrNro,pstrNro)
+}

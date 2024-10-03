@@ -1,0 +1,529 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- saved from url=(0069)https://app.tecsup.edu.pe/SGA/evaluaciones/consultarEvaluaciones.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+	<meta http-equiv="Pragma" content="no-cache">
+	
+
+	
+	<link href="./estilo_eva.css" rel="stylesheet" type="text/css">
+<script src="./prototype-1.6.0.3.js.descargar" type="text/JavaScript"></script>
+<script src="./Func_Comunes.js.descargar" type="text/JavaScript"></script>
+<script src="./mensajes.js.descargar" type="text/JavaScript"></script>
+
+	<title>Sistema de Gestión Administrativa - Evaluaciones</title>
+	
+	
+	<script type="text/javascript">
+		/*MouseOver*/
+		function MM_swapImgRestore()
+		{
+		 var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
+		}
+		function MM_preloadImages() { //v3.0
+		var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
+		 var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
+		 if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
+		}
+		
+		function MM_findObj(n, d) { //v4.01
+		var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+		 d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+		if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+		for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
+		if(!x && d.getElementById) x=d.getElementById(n); return x;
+		}
+		
+		function MM_swapImage() { //v3.0
+		var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
+		if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
+		}
+	</script>
+	<script language="javascript">
+
+function onLoad(){
+
+}
+function buscarAlumno(){
+	Fc_Popup("/SGA/inicio/buscar_alumno.html?tipoRetorno=CYN&ctrlUSE=&ctrlCOD=codAlumno&ctrlNOM=txtAlumno&ventanaOrigen=eva_con_bandeja",600,400);
+}
+
+function actualizarCabecera(){
+	//form = document.forms[0];
+	//form.operacion.value="CABECERA";
+	//form.submit();	
+	$('operacion').value='CABECERA';
+	$('frmMain').submit();
+}
+
+function fc_Regresar(){
+	window.location.href = "/SGA/menuEvaluaciones.html";
+}
+
+function fc_Regresar1(){
+	var url = "/SGA/evaluaciones/bandeja_alumnos_tutor.html" +
+				"?txhCodPeriodo=" + document.getElementById('txhCodPeriodoTutor').value + 
+				"&txhCodEvaluador=" + document.getElementById('txhCodEvaluador').value;
+	window.location.href = url; 
+}
+
+function fc_cambiaProducto(){
+	$('cboPeriodo').value='-1';
+	$('operacion').value='irCambiaProducto';	
+	$('frmMain').submit();
+}
+
+function fc_cambiaPeriodo(){
+	
+	form = document.forms[0];
+	if(form.cboProducto.value!="-1")
+	{	//if(form.cboPeriodo.value=="T")
+		//form.cboPeriodo.value="";		
+		form.operacion.value="irCambiaPeriodo";
+		form.submit();
+	}else
+		alert('Se deben llenar todos los parametros obligatorios');	
+}
+
+function fc_cambiaCiclo(){	
+	
+	form = document.forms[0];
+	if(form.cboProducto.value!="-1"){
+		if(form.cboCiclo.value=="T")
+			form.cboCiclo.value="";
+		
+		//form.operacion.value="irCambiaCiclo";
+		$('operacion').value='irCambiaCiclo';
+		$('frmMain').submit();
+		//form.submit();
+	}else
+		alert('Se deben llenar todos los parametros obligatorios');	
+}
+
+function fc_selecciona(cod,ciclo){
+	document.getElementById("txhSel").value = cod;
+	document.getElementById("txhCiclo").value = ciclo;
+}
+
+function fc_irDetalle(){
+	codCurso = document.getElementById("txhSel").value
+	codPeriodo = $F('cboPeriodo');
+	codProducto = document.getElementById("cboProducto").value 
+	codAlumno = document.getElementById("codAlumno").value
+	codCiclo = document.getElementById("txhCiclo").value
+	codEval = document.getElementById("txhCodEvaluador").value	
+	codCboPeriodo = $F('cboPeriodo');
+	
+	if( codCurso!="" ){
+		url = "/SGA/evaluaciones/consultarEvaluacionesDetalle.html?"
+		+"codCurso=" + codCurso
+		+"&codPeriodo=" + codPeriodo
+		+"&codProducto=" + codProducto
+		+"&codAlumno=" + codAlumno
+		+"&codCiclo=" + codCiclo
+		+"&txhCodEvaluador=" + codEval
+		+"&codCboPeriodo=" + codCboPeriodo
+        +"&txhIndProcTutor=" + document.getElementById("txhIndProcedencia").value
+        +"&txhCodPeriodoTutor=" + document.getElementById('txhCodPeriodoTutor').value;        
+		window.location.href=url;
+	}else
+		alert(mstrSeleccione);
+		
+}
+
+</script>
+</head>
+<body topmargin="0" leftmargin="0" onload="onLoad()">
+
+<div id="container">
+	<div id="content">
+		<form id="frmMain" name="frmMain" method="post" action="https://app.tecsup.edu.pe/SGA/evaluaciones/consultarEvaluaciones.html">
+
+	<input id="operacion" name="operacion" type="hidden" value="irCambiaPeriodo">	
+	<input id="codAlumno" name="codAlumno" type="hidden" value="586130">
+	<input id="txhCodPeriodo" name="codPeriodo" type="hidden" value="8032">
+	<input id="txhCodEvaluador" name="codEvaluador" type="hidden" value="586130">
+	<input id="codEspecialidad" name="codEspecialidad" type="hidden" value="53046">
+	<input id="flgBuscarAlumnos" name="flgBuscarAlumnos" type="hidden" value="0">
+	<input id="txhIndProcedencia" name="indProcedencia" type="hidden" value="0">
+	<input id="txhCodPeriodoTutor" name="codPeriodoTutor" type="hidden" value="">
+	
+	<input type="hidden" id="txhSel">
+	<input type="hidden" id="txhCiclo">
+	<!-- Icono Regresar -->
+		<table cellpadding="0" cellspacing="0" border="0" width="97%">
+			<tbody><tr>
+				<td class="opc_combo">&nbsp;&nbsp;&nbsp;</td>
+				<td align="right">&nbsp;<img src="./Regresar.gif" onclick="javascript:fc_Regresar();" style="cursor: hand" alt="Regresar">
+				</td>
+			</tr>
+		</tbody></table>
+	<!--Título de la Página  -->
+	<table cellpadding="0" cellspacing="0" class="borde_tabla" style="margin-left:9px; background-color: #FFFFFF;" width="97%">
+		 <tbody><tr class="fondo_cabecera_azul">
+		 
+		 	<td class="titulo_cabecera" width="100%">
+				Información General
+			</td>
+		 	
+		 </tr>
+	 </tbody></table>
+	
+			<table class="tabla" style="width: 97%; margin-top: 0px;margin-left:9px" cellspacing="2" cellpadding="0" border="0" background="./back-sup.jpg">
+				<tbody><tr>
+					<td class="">&nbsp;Alumno :</td>
+					<td align="left">
+						<table width="200px" border="0">
+						<tbody><tr>
+							<td align="left">
+								<input id="txtAlumno" name="txtAlumno" class="cajatexto_1" style="width:250px" type="text" value="CAYCEDO MENDOZA, ESTRELLITA MARIANELLA" readonly="true">
+							</td>
+							<td>
+							
+								
+								
+							</td>
+						</tr>
+						</tbody></table>											
+					</td>
+					<td class="">&nbsp;Promedio Acumulado</td>
+					<td align="left">&nbsp;<input id="txtPromAcumulado" name="txtPromAcumulado" class="cajatexto_1" style="width:40px" type="text" value="16.39" readonly="true"></td>
+				</tr>
+				<tr>
+					<td class="">&nbsp;Ranking Académico :</td>
+					<td align="left">&nbsp;<input id="txtRankinNro" name="txtRankinNro" class="cajatexto_1" style="width:40px" type="text" value="20" readonly="true">
+					&nbsp;&nbsp; <input id="txtRankinDes" name="txtRankinDes" class="cajatexto_1" style="width:110px" type="text" value="" readonly="true"></td>
+					<td class="texto_bold">&nbsp;</td>
+					<td align="left">&nbsp;</td>
+				</tr>
+				<tr>
+					<td align="left" colspan="4" height="15">&nbsp;</td>
+				</tr>
+				<tr>
+					<td class="">&nbsp;Producto :</td>
+					<td align="left">&nbsp;<select id="cboProducto" name="cboProducto" class="Combo" style="width:250px" onchange="fc_cambiaProducto()">
+						<option value="-1">--Seleccione--</option>
+						
+							<option value="100" selected="selected">Formación</option>
+							<!-- itemValue="codProducto" es el codigo interno q se guarda
+					        		  itemLabel="descripcion" es la descripcion a mostrar osea el valor q tiene el objeto de la clase Periodo-->
+						
+					</select></td>
+					<td class="">&nbsp;Especialidad :</td>
+					<td align="left">&nbsp;<input id="txtEspecialidad" name="txtEspecialidad" class="cajatexto_1" style="width:300px" type="text" value="Diseño y Desarrollo de Software" readonly="true"></td>
+				</tr>
+				<tr>
+					<td>&nbsp;Período :</td>
+					<td>&nbsp;<select id="cboPeriodo" name="cboPeriodo" class="Combo" style="width:250px" onchange="fc_cambiaPeriodo()">
+						<option value="-1">--Seleccione--</option>												
+						
+							<option value="8032" selected="selected">2023 - 2</option><option value="8031">2023 - 1</option><option value="8030">2022 - 2</option><option value="8029">2022 - 1</option><option value="8028">2021 - 2</option><option value="8027">2021 - 1</option>
+						
+					</select></td>
+				</tr>
+			</tbody></table>
+			<!--/td>
+		</tr>
+		<tr style="height: 10px;"><td></td></tr>
+		<tr style="height: 20px;">
+			<td-->
+				<!-- Titulo de la bandeja -->
+				 <table cellpadding="0" class="borde_tabla" cellspacing="0" width="97%" style="margin-left:9px;margin-top:6px">
+					 <tbody><tr class="fondo_cabecera_azul">
+		 
+						 	<td class="titulo_cabecera" width="100%">
+								Relación de Cursos
+							</td>
+						 	
+						 </tr>
+
+				 </tbody></table>
+			<!--/td>
+		</tr-->
+		<div style="overflow: auto; height: 300px; width:100%">
+		
+		
+		<!--tr>
+			<td-->
+			<!-- TABLA GLOBAL -->
+			
+			&nbsp;&nbsp;&nbsp;<span class="texto_bold">CICLO&nbsp;:VI</span>
+			
+			<!-- div style="overflow: auto; height: 150px; width: WIDTH: 97%; margin-left:9px; margin-top: 0px; margin-bottom: 5px;"  -->
+				<table class="" style="width: 1470px; border: 1px solid #048BBA; margin-left:9px; margin-top: 0px; margin-bottom: 5px;" cellspacing="1" cellpadding="0">
+					<tbody><tr height="20px">
+						<td class="headtabla" width="30px" align="center">&nbsp;Sel.</td>
+						<td class="headtabla" width="80px" align="center">&nbsp;Periodo</td>
+						<td class="headtabla" width="80px" align="center">&nbsp;Código</td>
+						<td class="headtabla" width="200px" align="center">&nbsp;Curso</td>
+						<td class="headtabla" width="70px" align="center">&nbsp;Sist. Eval.</td>
+<!-- 						<TD class="headtabla" width="100px" align="center">&nbsp;Profesor</TD> -->
+						<td class="headtabla" width="70px" align="center">&nbsp;Sección</td>
+						<td class="headtabla" width="80px" align="center">&nbsp;Promedio</td>
+						<td class="headtabla" width="80px" align="center">&nbsp;Nro. Veces</td>
+						<!-- ccordova 2008/05/21 -->
+						<td class="headtabla" width="80px" align="center">&nbsp;Examen 1</td>
+						<td class="headtabla" width="80px" align="center">&nbsp;Examen 2</td>
+						<td class="headtabla" width="80px" align="center">&nbsp;Inasistencia<br>Teoria</td>
+						<td class="headtabla" width="80px" align="center">&nbsp;Inasistencia<br>Laboratorio</td>
+						<td class="headtabla" width="80px" align="center">&nbsp;Inasistencia<br>Taller</td>
+						<td class="headtabla" width="80px" align="center">&nbsp;% Inasistencia</td>
+						<td class="headtabla" width="60px" align="center">&nbsp;Nota Recup.</td>
+						<td class="headtabla" width="60px" align="center">&nbsp;Prom. Recup.</td>						
+					</tr>
+					<!-- GRILLA -->
+								
+					
+							
+								
+								<tr class="fondocelesteclaro">
+							
+							<td align="center"><input type="radio" id="Check" name="Check" onclick="fc_selecciona(&#39;40232&#39;,&#39;6&#39;)"></td>
+							<td align="center">&nbsp;2023 - 2</td>
+							<td align="center">&nbsp;40232</td>
+							<td>&nbsp;Sociedad y Desarrollo Sostenible</td>
+							<td align="center">&nbsp;LabD           </td>
+
+
+							<td align="center">&nbsp;C24 B </td>
+							<td style="text-align:right">&nbsp;18.00</td>
+							<td align="center">&nbsp;1</td>
+							<!-- ccordova 2008/05/21 -->
+							<td align="center">&nbsp;</td>
+							<td align="center">&nbsp;</td>
+							<td align="center">&nbsp;0/0</td>
+							<td align="center">&nbsp;0/15</td>
+							<td align="center">&nbsp;0/0</td>
+							<td align="center">&nbsp;0</td>
+							
+							<td align="center">&nbsp;</td>
+							<td align="center">&nbsp;</td>								
+								
+						</tr>
+					
+							
+								<tr class="fondoceldablanco">
+								
+							
+							<td align="center"><input type="radio" id="Check" name="Check" onclick="fc_selecciona(&#39;40234&#39;,&#39;6&#39;)"></td>
+							<td align="center">&nbsp;2023 - 2</td>
+							<td align="center">&nbsp;40234</td>
+							<td>&nbsp;Emprendimiento</td>
+							<td align="center">&nbsp;LabD           </td>
+
+
+							<td align="center">&nbsp;C24 B </td>
+							<td style="text-align:right">&nbsp;14.00</td>
+							<td align="center">&nbsp;1</td>
+							<!-- ccordova 2008/05/21 -->
+							<td align="center">&nbsp;</td>
+							<td align="center">&nbsp;</td>
+							<td align="center">&nbsp;0/0</td>
+							<td align="center">&nbsp;2/16</td>
+							<td align="center">&nbsp;0/0</td>
+							<td align="center">&nbsp;12</td>
+							
+							<td align="center">&nbsp;</td>
+							<td align="center">&nbsp;</td>								
+								
+						</tr>
+					
+							
+								
+								<tr class="fondocelesteclaro">
+							
+							<td align="center"><input type="radio" id="Check" name="Check" onclick="fc_selecciona(&#39;40236&#39;,&#39;6&#39;)"></td>
+							<td align="center">&nbsp;2023 - 2</td>
+							<td align="center">&nbsp;40236</td>
+							<td>&nbsp;Start up venture project</td>
+							<td align="center">&nbsp;LabA           </td>
+
+
+							<td align="center">&nbsp;C24 B </td>
+							<td style="text-align:right">&nbsp;16.00</td>
+							<td align="center">&nbsp;1</td>
+							<!-- ccordova 2008/05/21 -->
+							<td align="center">&nbsp;</td>
+							<td align="center">&nbsp;</td>
+							<td align="center">&nbsp;1/16</td>
+							<td align="center">&nbsp;1/16</td>
+							<td align="center">&nbsp;0/0</td>
+							<td align="center">&nbsp;6</td>
+							
+							<td align="center">&nbsp;</td>
+							<td align="center">&nbsp;</td>								
+								
+						</tr>
+					
+							
+								<tr class="fondoceldablanco">
+								
+							
+							<td align="center"><input type="radio" id="Check" name="Check" onclick="fc_selecciona(&#39;40251&#39;,&#39;6&#39;)"></td>
+							<td align="center">&nbsp;2023 - 2</td>
+							<td align="center">&nbsp;40251</td>
+							<td>&nbsp;Integración de Sistemas Empresariales Avanzado</td>
+							<td align="center">&nbsp;LabA           </td>
+
+
+							<td align="center">&nbsp;C24 B </td>
+							<td style="text-align:right">&nbsp;19.00</td>
+							<td align="center">&nbsp;1</td>
+							<!-- ccordova 2008/05/21 -->
+							<td align="center">&nbsp;</td>
+							<td align="center">&nbsp;</td>
+							<td align="center">&nbsp;1/16</td>
+							<td align="center">&nbsp;2/16</td>
+							<td align="center">&nbsp;0/0</td>
+							<td align="center">&nbsp;8</td>
+							
+							<td align="center">&nbsp;</td>
+							<td align="center">&nbsp;</td>								
+								
+						</tr>
+					
+							
+								
+								<tr class="fondocelesteclaro">
+							
+							<td align="center"><input type="radio" id="Check" name="Check" onclick="fc_selecciona(&#39;40238&#39;,&#39;6&#39;)"></td>
+							<td align="center">&nbsp;2023 - 2</td>
+							<td align="center">&nbsp;40238</td>
+							<td>&nbsp;Inteligencia de Negocios</td>
+							<td align="center">&nbsp;LabA           </td>
+
+
+							<td align="center">&nbsp;C24 B </td>
+							<td style="text-align:right">&nbsp;16.00</td>
+							<td align="center">&nbsp;1</td>
+							<!-- ccordova 2008/05/21 -->
+							<td align="center">&nbsp;</td>
+							<td align="center">&nbsp;</td>
+							<td align="center">&nbsp;1/16</td>
+							<td align="center">&nbsp;0/16</td>
+							<td align="center">&nbsp;0/0</td>
+							<td align="center">&nbsp;3</td>
+							
+							<td align="center">&nbsp;</td>
+							<td align="center">&nbsp;</td>								
+								
+						</tr>
+					
+							
+								<tr class="fondoceldablanco">
+								
+							
+							<td align="center"><input type="radio" id="Check" name="Check" onclick="fc_selecciona(&#39;40249&#39;,&#39;6&#39;)"></td>
+							<td align="center">&nbsp;2023 - 2</td>
+							<td align="center">&nbsp;40249</td>
+							<td>&nbsp;Desarrollo de Aplicaciones Empresariales Avanzado</td>
+							<td align="center">&nbsp;LabA           </td>
+
+
+							<td align="center">&nbsp;C24 B </td>
+							<td style="text-align:right">&nbsp;18.00</td>
+							<td align="center">&nbsp;1</td>
+							<!-- ccordova 2008/05/21 -->
+							<td align="center">&nbsp;</td>
+							<td align="center">&nbsp;</td>
+							<td align="center">&nbsp;2/14</td>
+							<td align="center">&nbsp;2/14</td>
+							<td align="center">&nbsp;0/0</td>
+							<td align="center">&nbsp;12</td>
+							
+							<td align="center">&nbsp;</td>
+							<td align="center">&nbsp;</td>								
+								
+						</tr>
+					
+							
+								
+								<tr class="fondocelesteclaro">
+							
+							<td align="center"><input type="radio" id="Check" name="Check" onclick="fc_selecciona(&#39;40250&#39;,&#39;6&#39;)"></td>
+							<td align="center">&nbsp;2023 - 2</td>
+							<td align="center">&nbsp;40250</td>
+							<td>&nbsp;Gestión de Servicios de Software</td>
+							<td align="center">&nbsp;AulH</td>
+
+
+							<td align="center">&nbsp;C24 B </td>
+							<td style="text-align:right">&nbsp;16.00</td>
+							<td align="center">&nbsp;1</td>
+							<!-- ccordova 2008/05/21 -->
+							<td align="center">&nbsp;</td>
+							<td align="center">&nbsp;</td>
+							<td align="center">&nbsp;0/15</td>
+							<td align="center">&nbsp;0/0</td>
+							<td align="center">&nbsp;0/0</td>
+							<td align="center">&nbsp;0</td>
+							
+							<td align="center">&nbsp;</td>
+							<td align="center">&nbsp;</td>								
+								
+						</tr>
+					
+							
+								<tr class="fondoceldablanco">
+								
+							
+							<td align="center"><input type="radio" id="Check" name="Check" onclick="fc_selecciona(&#39;40237&#39;,&#39;6&#39;)"></td>
+							<td align="center">&nbsp;2023 - 2</td>
+							<td align="center">&nbsp;40237</td>
+							<td>&nbsp;Consultoria y Desarrollo Profesional</td>
+							<td align="center">&nbsp;LabC           </td>
+
+
+							<td align="center">&nbsp;C24 B </td>
+							<td style="text-align:right">&nbsp;16.00</td>
+							<td align="center">&nbsp;1</td>
+							<!-- ccordova 2008/05/21 -->
+							<td align="center">&nbsp;</td>
+							<td align="center">&nbsp;</td>
+							<td align="center">&nbsp;2/16</td>
+							<td align="center">&nbsp;1/16</td>
+							<td align="center">&nbsp;0/0</td>
+							<td align="center">&nbsp;8</td>
+							
+							<td align="center">&nbsp;</td>
+							<td align="center">&nbsp;</td>								
+								
+						</tr>
+					
+				</tbody></table>
+			<!-- /div -->
+			<!--/td>
+		</tr>
+		<tr>
+			<td-->
+			<table class="tabla" style="width: 97%; margin-left:9px;margin-top: 6px;border: 1px solid #048BBA" cellspacing="2" cellpadding="0" bgcolor="#f2f2f2">
+				<tbody><tr>
+					<td class="texto_bold">Promedio del Ciclo</td>
+					<td align="left">
+					<input type="text" class="cajatexto_1" style="width:40px; text-align:right" readonly="readonly" value="17.05">							
+						</td>
+					<td class="texto_bold" align="right">Ranking del Ciclo</td>
+					<td align="center">					
+					<input type="text" class="cajatexto_1" style="width:40px" readonly="readonly" value="10">	
+						 &nbsp;&nbsp;					
+						<input type="text" class="cajatexto_1" style="width:100px" readonly="readonly" value="">						
+						</td>
+				</tr>
+			</tbody></table><br><br>
+	
+	<!-- TABLA GLOBAL -->
+	<br>
+	<table cellpadding="0" cellspacing="0" border="0" bordercolor="GREEN" align="center" height="30px" width="90%">
+		<tbody><tr>
+			<td align="center">
+				<a onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage(&#39;imgconsultardetalle&#39;,&#39;&#39;,&#39;/SGA/images/botones/consdetallecurso2.jpg&#39;,1)">
+				<img src="./consdetallecurso1.jpg" id="imgconsultardetalle" alt="Consultar Detalle Curso" onclick="fc_irDetalle()" style="cursor:pointer;"></a></td>
+		</tr>
+	</tbody></table>
+
+	</div></form>
+</div>
+
+
+<meta http-equiv="Pragma" content="no-cache">
+
+</div></body></html>
